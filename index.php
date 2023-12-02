@@ -3,26 +3,48 @@
 include 'config.php';
 session_start();
 // Check if the user is already logged in
+// Check if the user is already logged in
 if (isset($_POST['user_login_submit'])) {
     $Email = $_POST['Email'];
     $Password = $_POST['Password'];
 
-    $sql = "SELECT * FROM signup WHERE Email = '$Email' AND Password = BINARY'$Password'";
+    $sql = "SELECT * FROM signup WHERE Email = '$Email' AND Password = BINARY '$Password'";
     $result = mysqli_query($conn, $sql);
-
-    if ($result->num_rows > 0) {
-        $_SESSION['usermail']=$Email;
+    $row_count=mysqli_num_rows($result);
+    session_start();
+    if ($row_count > 0) {
+        // Successful login logic
+        session_start();
+        $_SESSION['usermail'] = $Email;
+        $_SESSION['login_success'] = true;
         $Email = "";
         $Password = "";
-        header ("Location: home.php");
     } else {
+        // Unsuccessful login logic
         echo "<script>swal({
             title: 'Something went wrong',
             icon: 'error',
         });
         </script>";
     }
+    
+    // Redirection logic
+    if (isset($_SESSION['usermail']) && $_SESSION['login_success']) {
+        header("Location: http://localhost/hotel_project_/reservation.php");
+        exit();
+    } else {
+        header("Location: http://localhost/hotel_project_/index.php");
+        exit();
+    }
+    
+    
+    // If the login was unsuccessful or the redirection didn't happen, redirect to index.php
+    header("Location: http://localhost/hotel_project_/index.php");
+    exit(); // Make sure to exit after header to prevent further execution
+    
+    
 }
+
 
 ?>
 
@@ -148,7 +170,8 @@ if (isset($_POST['user_login_submit'])) {
                             </script>";
                         }
                     }
-                ?> 
+                        ?>
+
                 <form class="employee_login authsection" id="employeelogin" action="" method="POST">
                     <div class="form-floating">
                         <input type="email" class="form-control" name="Emp_Email" placeholder=" ">
@@ -180,8 +203,11 @@ if (isset($_POST['user_login_submit'])) {
                     }
                     else{
                         if ($Password == $CPassword) {
-                            $sql = "SELECT * FROM signup WHERE Email = '$Email'";
-                            $result = mysqli_query($conn, $sql);
+                            $sql = "SELECT * FROM signup WHERE Email = '$Email' AND Password = BINARY '$Password'";
+
+$result = mysqli_query($conn, $sql);
+
+
     
                             if ($result->num_rows > 0) {
                                 echo "<script>swal({
