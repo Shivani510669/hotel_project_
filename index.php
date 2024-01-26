@@ -3,7 +3,9 @@
 include 'config.php';
 session_start();
 // Check if the user is already logged in
-// Check if the user is already logged in
+// Check if the user is already logged in 
+// Check if the user is already logged in 
+
 if (isset($_POST['user_login_submit'])) {
     $Email = $_POST['Email'];
     $Password = $_POST['Password'];

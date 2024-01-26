@@ -292,7 +292,7 @@ font-size: 30px;
     background-size: cover;
 }
 .box:nth-child(3){
-    background-image: url(../image/food.jpg);
+    background-image: url(../image/food.jpeg);
     background-size: cover;
 }
 .box:nth-child(4){

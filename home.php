@@ -335,10 +335,10 @@ font-size: 17px !important;
         <h2>Spa</h2>
       </div> -->
       <div class="box">
-        <h2>24*7 Restaurants</h2>
+        <h2>24*7 Restaurant</h2>
       </div>
       <div class="box">
-        <h2>24*7 Snacks</h2>
+        <h2>24*7 Snacks </h2>
       </div>
       <!-- <div class="box">
         <h2>Heli service</h2>
